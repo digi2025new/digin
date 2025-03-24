@@ -11,22 +11,18 @@
   <header>
     <div class="header-container">
       <h1>Digital Notice Board</h1>
-      {% if session.username %}
-        <nav>
-          <ul>
+      <nav>
+        <ul>
+          {% if session.username %}
             <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
-          </ul>
-        </nav>
-      {% else %}
-        <nav>
-          <ul>
+          {% else %}
             <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('login') }}">Login</a></li>
             <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-          </ul>
-        </nav>
-      {% endif %}
+          {% endif %}
+        </ul>
+      </nav>
     </div>
   </header>
   <div class="container">

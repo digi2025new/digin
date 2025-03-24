@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="dashboard">
   <h2>Dashboard</h2>
   <p>Select your department:</p>
   <div class="departments">
@@ -7,4 +8,5 @@
       <button onclick="window.location.href='{{ url_for('department', dept=dept) }}'">{{ dept | upper }}</button>
     {% endfor %}
   </div>
+</div>
 {% endblock %}
