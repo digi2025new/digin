@@ -3,14 +3,7 @@
 <div class="public-page">
   <h2>{{ department | upper }} Notices - Slideshow</h2>
   
-  <!-- Timer Form -->
-  <form method="get" action="{{ url_for('public_dept', dept=department) }}" class="timer-form">
-    <label for="timer">Set slideshow timer (seconds):</label>
-    <input type="number" id="timer" name="timer" min="1" value="{{ timer }}" required>
-    <input type="submit" value="Set Timer" class="btn">
-  </form>
-  
-  <!-- Slideshow Container -->
+  <!-- Slideshow Container (Timer form removed) -->
   <div class="slideshow">
     {% for notice in notices %}
       <div class="slide">
@@ -31,7 +24,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  let timer = {{ timer }} * 1000; // Convert seconds to milliseconds
+  // Fixed timer of 5 seconds (5000 milliseconds)
+  let timer = 5000;
   let slides = document.querySelectorAll('.slideshow .slide');
   let currentSlide = 0;
   
@@ -42,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   
-  // Set up the slideshow interval
+  // Set up the slideshow interval to cycle slides every 5 seconds
   setInterval(() => {
     slides[currentSlide].style.display = 'none';
     currentSlide = (currentSlide + 1) % slides.length;
