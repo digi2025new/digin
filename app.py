@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
-from werkzeug.utils import secure_filename
 import os
 import sqlite3
+from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Change this to a secure key
+app.secret_key = 'your_secure_key'  # Change this to a secure key
 
 # Configuration for file uploads
 UPLOAD_FOLDER = 'uploads/'
@@ -16,13 +16,13 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def init_db():
     with sqlite3.connect('notice_board.db') as conn:
         c = conn.cursor()
-        # Users table for signup/login
+        # Create users table if it doesn't exist
         c.execute('''CREATE TABLE IF NOT EXISTS users (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         username TEXT UNIQUE NOT NULL,
                         password TEXT NOT NULL
                      )''')
-        # Notices table (each notice linked to a department)
+        # Create notices table if it doesn't exist
         c.execute('''CREATE TABLE IF NOT EXISTS notices (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         department TEXT NOT NULL,
@@ -33,23 +33,21 @@ def init_db():
 
 init_db()
 
-# Helper: Check file extension
+# Helper function: Check if file extension is allowed
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# --- Routes ---
-
-# Index Page
+# Home page
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Sign Up
+# Signup route
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
         with sqlite3.connect('notice_board.db') as conn:
             c = conn.cursor()
             try:
@@ -62,12 +60,12 @@ def signup():
                 return redirect(url_for('signup'))
     return render_template('signup.html')
 
-# Login
+# Login route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
         with sqlite3.connect('notice_board.db') as conn:
             c = conn.cursor()
             c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
@@ -81,23 +79,30 @@ def login():
                 return redirect(url_for('login'))
     return render_template('login.html')
 
-# Dashboard with animated department buttons
+# Logout route
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('dept', None)
+    flash('Logged out successfully.')
+    return redirect(url_for('index'))
+
+# Dashboard route (requires login)
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
-        # Departments list (could be extended as needed)
         departments = ['extc', 'it', 'mech', 'cs']
         return render_template('dashboard.html', departments=departments)
     else:
         flash('Please login first.')
         return redirect(url_for('login'))
 
-# Department Admin Page – asks for department admin password (e.g., extc@22)
+# Department admin login route
 @app.route('/department/<dept>', methods=['GET', 'POST'])
 def department(dept):
     if request.method == 'POST':
-        admin_pass = request.form['admin_pass']
-        # For simplicity, the admin password is set as: dept + '@22'
+        admin_pass = request.form.get('admin_pass')
+        # For simplicity, admin password is defined as dept + "@22"
         if admin_pass == f"{dept}@22":
             session['dept'] = dept
             return redirect(url_for('admin', dept=dept))
@@ -106,7 +111,7 @@ def department(dept):
             return redirect(url_for('department', dept=dept))
     return render_template('department.html', department=dept)
 
-# Admin Panel – Upload & manage notices
+# Admin panel route: upload and manage notices
 @app.route('/admin/<dept>', methods=['GET', 'POST'])
 def admin(dept):
     if 'dept' in session and session['dept'] == dept:
@@ -137,7 +142,7 @@ def admin(dept):
         flash('Unauthorized access. Please enter department admin password.')
         return redirect(url_for('department', dept=dept))
 
-# Delete Notice
+# Delete notice route
 @app.route('/delete_notice/<int:notice_id>')
 def delete_notice(notice_id):
     if 'dept' in session:
@@ -159,17 +164,17 @@ def delete_notice(notice_id):
                     flash('Unauthorized action.')
             else:
                 flash('Notice not found.')
-        return redirect(url_for('admin', dept=session['dept']))
+        return redirect(url_for('admin', dept=session.get('dept')))
     else:
         flash('Unauthorized access.')
         return redirect(url_for('login'))
 
-# Serve Uploaded Files
+# Route to serve uploaded files
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# Slideshow – Displays notices with a user-specified timer
+# Slideshow route to display notices with timer
 @app.route('/slideshow/<dept>', methods=['GET', 'POST'])
 def slideshow(dept):
     timer = 5  # default timer in seconds
@@ -185,5 +190,4 @@ def slideshow(dept):
     return render_template('slideshow.html', department=dept, notices=notices, timer=timer)
 
 if __name__ == '__main__':
-    # Do not use debug=True in production.
     app.run(host='0.0.0.0')
