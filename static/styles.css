@@ -19,12 +19,12 @@ body {
     overflow: hidden;
 }
 
-/* Flash messages (e.g., for errors/success) */
+/* Flash messages */
 .flashes {
     list-style: none;
     padding: 0;
     margin-bottom: 20px;
-    color: #c00; /* Red color for errors/messages */
+    color: #c00;
 }
 
 /* ---------------------------------------
@@ -47,18 +47,23 @@ header {
 
 .header-container h1 {
     font-size: 1.8rem;
-    margin: 0;
 }
 
-.header-container p {
-    margin: 0;
+.header-container nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.header-container nav ul li a {
+    color: #fff;
+    text-decoration: none;
 }
 
 /* ---------------------------------------
-   3. HERO SECTION (Landing Page)
+   3. HERO SECTION (if applicable)
 ---------------------------------------- */
 .hero {
-    /* Replace with your own image if desired */
     background: url("https://via.placeholder.com/1200x400") no-repeat center center/cover;
     width: 100%;
     padding: 100px 0;
@@ -70,11 +75,8 @@ header {
 .hero::after {
     content: "";
     position: absolute;
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0;
-    background: rgba(0,0,0,0.5); /* Dark overlay */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
 }
 
 .hero-content {
@@ -107,7 +109,7 @@ header {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007BFF; /* Primary button color */
+    background-color: #007BFF;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -131,10 +133,17 @@ header {
     background-color: #1e7e34;
 }
 
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
 /* ---------------------------------------
    5. FORMS (Login & Sign Up)
 ---------------------------------------- */
-/* Container that wraps the form in a neat card-like box */
 .form-container {
     background: #fff;
     border-radius: 8px;
@@ -168,7 +177,68 @@ header {
 }
 
 /* ---------------------------------------
-   6. DASHBOARD & DEPARTMENTS
+   6. ADMIN PANEL & NOTICES
+---------------------------------------- */
+.admin-panel {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.upload-section, .notices-section {
+  margin-bottom: 30px;
+}
+
+.notices-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.notice-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(33.333% - 20px);
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.notice-card:hover {
+  transform: scale(1.02);
+}
+
+.notice-card img, 
+.notice-card video, 
+.notice-card audio {
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.notice-actions {
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .notice-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .notice-card {
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------
+   7. DEPARTMENT DASHBOARD BUTTONS
 ---------------------------------------- */
 .departments button {
     margin: 10px;
@@ -183,24 +253,4 @@ header {
 .departments button:hover {
     transform: scale(1.1);
     background-color: #555;
-}
-
-/* ---------------------------------------
-   7. ADMIN PANEL & NOTICES
----------------------------------------- */
-.notice {
-    background: #fff;
-    margin: 10px 0;
-    padding: 15px;
-    border-left: 5px solid #333;
-}
-
-.notice img, 
-.notice video {
-    max-width: 100%;
-    height: auto;
-}
-
-.notice audio {
-    width: 100%;
 }
