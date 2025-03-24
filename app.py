@@ -33,7 +33,7 @@ def init_db():
 
 init_db()
 
-# Helper function: Check if file extension is allowed
+# Helper: Check if file extension is allowed
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -188,6 +188,23 @@ def slideshow(dept):
         c.execute("SELECT filename, filetype FROM notices WHERE department=?", (dept,))
         notices = c.fetchall()
     return render_template('slideshow.html', department=dept, notices=notices, timer=timer)
+
+# -------------------------------
+# Public Department Page Route
+# -------------------------------
+# This route catches URLs such as /extc, /it, /mech, or /cs
+@app.route('/<dept>')
+def public_dept(dept):
+    dept = dept.lower()
+    if dept in ['extc', 'it', 'mech', 'cs']:
+        with sqlite3.connect('notice_board.db') as conn:
+            c = conn.cursor()
+            c.execute("SELECT filename, filetype FROM notices WHERE department=?", (dept,))
+            notices = c.fetchall()
+        return render_template('public.html', department=dept, notices=notices)
+    else:
+        flash('Department not found.')
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
