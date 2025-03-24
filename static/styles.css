@@ -79,7 +79,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
   }
   
   .hero-content {
@@ -145,7 +145,7 @@
   }
   
   /* ---------------------------------------
-     5. FORMS (Login & Sign Up & Admin Login)
+     5. FORMS (Login, Sign Up, Admin Login)
   ---------------------------------------- */
   .form-container {
     background: #fff;
@@ -153,7 +153,7 @@
     max-width: 400px;
     margin: 40px auto;
     padding: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   .form-container h2 {
@@ -212,7 +212,7 @@
     padding: 20px;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   .upload-section,
@@ -241,7 +241,7 @@
     border-radius: 4px;
     width: calc(33.333% - 20px);
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
   }
   
@@ -286,7 +286,7 @@
     padding: 20px;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
   
@@ -302,7 +302,53 @@
   }
   
   /* ---------------------------------------
-     9. RESPONSIVE DESIGN
+     9. MODAL (Interactive Public Page)
+  ---------------------------------------- */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+  }
+  
+  .modal-content {
+    margin: 5% auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+  
+  @keyframes zoom {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+  
+  /* Close button for modal */
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+  }
+  
+  /* ---------------------------------------
+     10. RESPONSIVE DESIGN
   ---------------------------------------- */
   @media (max-width: 768px) {
     .notice-card {
@@ -312,6 +358,10 @@
   
   @media (max-width: 480px) {
     .notice-card {
+      width: 100%;
+    }
+    
+    .modal-content {
       width: 100%;
     }
   }

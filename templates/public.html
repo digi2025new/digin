@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="public-page">
+  <h2>{{ department | upper }} Notices</h2>
+  <div class="notices-grid">
+    {% for notice in notices %}
+      <div class="notice-card" onclick="openModal('{{ url_for('uploaded_file', filename=notice[0]) }}', '{{ notice[1] }}')">
+        {% if notice[1] in ['png', 'jpg', 'jpeg', 'gif'] %}
+          <img src="{{ url_for('uploaded_file', filename=notice[0]) }}" alt="Notice Image">
+        {% elif notice[1] == 'mp4' %}
+          <video src="{{ url_for('uploaded_file', filename=notice[0]) }}" muted></video>
+        {% elif notice[1] == 'mp3' %}
+          <audio src="{{ url_for('uploaded_file', filename=notice[0]) }}" controls></audio>
+        {% else %}
+          <p>View Document</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Modal for interactive viewing -->
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <div class="modal-content" id="modalContent"></div>
+</div>
+{% endblock %}
