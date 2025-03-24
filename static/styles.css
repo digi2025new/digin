@@ -10,7 +10,7 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header */
+/* Header (from previous updates) */
 header {
     background-color: #333;
     color: #fff;
@@ -34,7 +34,7 @@ header {
     margin: 0;
 }
 
-/* Container */
+/* Container for overall page content */
 .container {
     width: 80%;
     margin: 20px auto;
@@ -49,72 +49,66 @@ header {
     color: #c00; /* red color for errors/messages */
 }
 
-/* Hero Section */
-.hero {
-    background: url("https://via.placeholder.com/1200x400") no-repeat center center/cover;
-    /* Replace the URL with your own hero image if you like */
-    width: 100%;
-    padding: 100px 0;
-    color: #fff;
-    text-align: center;
-    position: relative;
+/* Form Container */
+.form-container {
+    background: #fff;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5); /* dark overlay */
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
+.form-container h2 {
     margin-bottom: 20px;
+    text-align: center;
 }
 
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+.form-group {
+    margin-bottom: 15px;
 }
 
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-/* Buttons */
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button Styles */
 .btn {
     display: inline-block;
-    padding: 15px 25px;
-    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Primary button color */
     color: #fff;
-    background-color: #007BFF; /* Primary color */
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .btn:hover {
     background-color: #0056b3;
 }
 
+/* (Optional) Secondary button style */
 .btn-secondary {
-    background-color: #28a745; /* Secondary color (green) */
+    background-color: #28a745;
 }
 
 .btn-secondary:hover {
     background-color: #1e7e34;
 }
 
-/* Department Buttons (Dashboard) */
+/* Additional styling from previous enhancements */
 .departments button {
     margin: 10px;
     transition: transform 0.3s;
@@ -130,7 +124,7 @@ header {
     background-color: #555;
 }
 
-/* Admin notices */
+/* Notice styling (admin, etc.) */
 .notice {
     background: #fff;
     margin: 10px 0;
