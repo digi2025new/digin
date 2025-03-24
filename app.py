@@ -185,4 +185,5 @@ def slideshow(dept):
     return render_template('slideshow.html', department=dept, notices=notices, timer=timer)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    # Do not use debug=True in production.
+    app.run(host='0.0.0.0')
