@@ -8,10 +8,12 @@
 </head>
 <body>
   <header>
-    <h1>Digital Notice Board</h1>
-    {% if session.username %}
-      <p>Logged in as: {{ session.username }}</p>
-    {% endif %}
+    <div class="header-container">
+      <h1>Digital Notice Board</h1>
+      {% if session.username %}
+        <p>Logged in as: {{ session.username }}</p>
+      {% endif %}
+    </div>
   </header>
   <div class="container">
     {% with messages = get_flashed_messages() %}

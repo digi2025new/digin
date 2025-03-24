@@ -1,43 +1,136 @@
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset/Defaults */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
+/* Header */
 header {
     background-color: #333;
     color: #fff;
-    padding: 10px 0;
+    padding: 20px 0;
     text-align: center;
 }
 
+.header-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-container h1 {
+    font-size: 1.8rem;
+}
+
+.header-container p {
+    margin: 0;
+}
+
+/* Container */
 .container {
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
     overflow: hidden;
 }
 
+/* Flash messages */
 .flashes {
     list-style: none;
     padding: 0;
-    color: red;
+    margin-bottom: 20px;
+    color: #c00; /* red color for errors/messages */
 }
 
-button {
+/* Hero Section */
+.hero {
+    background: url("https://via.placeholder.com/1200x400") no-repeat center center/cover;
+    /* Replace the URL with your own hero image if you like */
+    width: 100%;
+    padding: 100px 0;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); /* dark overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Buttons */
+.btn {
     display: inline-block;
-    background: #333;
+    padding: 15px 25px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007BFF; /* Primary color */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #28a745; /* Secondary color (green) */
+}
+
+.btn-secondary:hover {
+    background-color: #1e7e34;
+}
+
+/* Department Buttons (Dashboard) */
+.departments button {
+    margin: 10px;
+    transition: transform 0.3s;
+    background-color: #333;
     color: #fff;
     padding: 10px 20px;
-    margin: 10px 0;
     border: none;
     cursor: pointer;
 }
 
-button:hover {
-    background: #555;
+.departments button:hover {
+    transform: scale(1.1);
+    background-color: #555;
 }
 
+/* Admin notices */
 .notice {
     background: #fff;
     margin: 10px 0;
@@ -52,14 +145,4 @@ button:hover {
 
 .notice audio {
     width: 100%;
-}
-
-/* Optional: Styles for the animated dashboard */
-.departments button {
-    margin: 10px;
-    transition: transform 0.3s;
-}
-
-.departments button:hover {
-    transform: scale(1.1);
 }
