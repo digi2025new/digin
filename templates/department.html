@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ department | upper }} Department Admin Login</h2>
+  <form method="POST" action="{{ url_for('department', dept=department) }}">
+    <label for="admin_pass">Admin Password:</label>
+    <input type="password" name="admin_pass" required>
+    <br>
+    <input type="submit" value="Enter Admin Panel">
+  </form>
+  <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+{% endblock %}

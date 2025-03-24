@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    color: red;
+}
+
+button {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
+
+.notice {
+    background: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-left: 5px solid #333;
+}
+
+.notice img, .notice video {
+    max-width: 100%;
+    height: auto;
+}
+
+.notice audio {
+    width: 100%;
+}
+
+/* Optional: Styles for the animated dashboard */
+.departments button {
+    margin: 10px;
+    transition: transform 0.3s;
+}
+
+.departments button:hover {
+    transform: scale(1.1);
+}

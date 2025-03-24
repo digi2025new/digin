@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ department | upper }} Admin Panel</h2>
+  <h3>Upload Notice</h3>
+  <form method="POST" action="{{ url_for('admin', dept=department) }}" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <br>
+    <input type="submit" value="Upload">
+  </form>
+  <h3>Uploaded Notices</h3>
+  <ul>
+    {% for notice in notices %}
+      <li>
+        {% set file_url = url_for('uploaded_file', filename=notice[2]) %}
+        {% if notice[3] in ['png', 'jpg', 'jpeg', 'gif'] %}
+          <img src="{{ file_url }}" alt="Notice Image" style="max-width:300px;">
+        {% elif notice[3] == 'mp4' %}
+          <video src="{{ file_url }}" controls style="max-width:300px;"></video>
+        {% elif notice[3] == 'mp3' %}
+          <audio src="{{ file_url }}" controls></audio>
+        {% else %}
+          <a href="{{ file_url }}" target="_blank">View Document</a>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('delete_notice', notice_id=notice[0]) }}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+  <p><a href="{{ url_for('slideshow', dept=department) }}">View Slideshow</a></p>
+{% endblock %}
