@@ -281,28 +281,35 @@
      8. SLIDESHOW
   ---------------------------------------- */
   .slideshow-container {
+    width: 90%;
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
   
   .slideshow {
-    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    height: auto;
   }
   
-  .slideshow img,
-  .slideshow video,
-  .slideshow audio {
+  .slide {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .slide img,
+  .slide video,
+  .slide audio {
     max-width: 100%;
     border-radius: 4px;
   }
   
   /* ---------------------------------------
-     9. MODAL (Interactive Public Page)
+     9. MODAL (if used on other pages)
   ---------------------------------------- */
   .modal {
     display: none; /* Hidden by default */
@@ -312,8 +319,8 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
   }
   
   .modal-content {
@@ -353,6 +360,10 @@
   @media (max-width: 768px) {
     .notice-card {
       width: calc(50% - 20px);
+    }
+    
+    .slideshow-container {
+      width: 95%;
     }
   }
   

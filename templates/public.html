@@ -3,22 +3,24 @@
 <div class="public-page">
   <h2>{{ department | upper }} Notices - Slideshow</h2>
   
-  <!-- Slideshow Container (Timer form removed) -->
-  <div class="slideshow">
-    {% for notice in notices %}
-      <div class="slide">
-        {% set file_url = url_for('uploaded_file', filename=notice[0]) %}
-        {% if notice[1] in ['png', 'jpg', 'jpeg', 'gif'] %}
-          <img src="{{ file_url }}" alt="Notice Image">
-        {% elif notice[1] == 'mp4' %}
-          <video src="{{ file_url }}" controls muted></video>
-        {% elif notice[1] == 'mp3' %}
-          <audio src="{{ file_url }}" controls></audio>
-        {% else %}
-          <a href="{{ file_url }}" target="_blank">View Document</a>
-        {% endif %}
-      </div>
-    {% endfor %}
+  <!-- Centered Slideshow Container -->
+  <div class="slideshow-container">
+    <div class="slideshow">
+      {% for notice in notices %}
+        <div class="slide">
+          {% set file_url = url_for('uploaded_file', filename=notice[0]) %}
+          {% if notice[1] in ['png', 'jpg', 'jpeg', 'gif'] %}
+            <img src="{{ file_url }}" alt="Notice Image">
+          {% elif notice[1] == 'mp4' %}
+            <video src="{{ file_url }}" controls muted></video>
+          {% elif notice[1] == 'mp3' %}
+            <audio src="{{ file_url }}" controls></audio>
+          {% else %}
+            <a href="{{ file_url }}" target="_blank">View Document</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
@@ -31,12 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Hide all slides except the first one
   slides.forEach((slide, index) => {
-    if(index !== 0) {
+    if (index !== 0) {
       slide.style.display = 'none';
     }
   });
   
-  // Set up the slideshow interval to cycle slides every 5 seconds
+  // Cycle through slides every 5 seconds
   setInterval(() => {
     slides[currentSlide].style.display = 'none';
     currentSlide = (currentSlide + 1) % slides.length;
