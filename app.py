@@ -174,7 +174,7 @@ def delete_notice(notice_id):
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# Slideshow route to display notices with timer
+# Slideshow route to display notices with timer (used previously for admin slideshow)
 @app.route('/slideshow/<dept>', methods=['GET', 'POST'])
 def slideshow(dept):
     timer = 5  # default timer in seconds
@@ -190,18 +190,20 @@ def slideshow(dept):
     return render_template('slideshow.html', department=dept, notices=notices, timer=timer)
 
 # -------------------------------
-# Public Department Page Route
+# Public Department Page Route (Slideshow Version)
 # -------------------------------
-# This route catches URLs such as /extc, /it, /mech, or /cs
+# This route shows the public department page as a slideshow with a set time option.
 @app.route('/<dept>')
 def public_dept(dept):
     dept = dept.lower()
     if dept in ['extc', 'it', 'mech', 'cs']:
+        # Get timer value from GET parameters; default to 5 seconds
+        timer = request.args.get('timer', default=5, type=int)
         with sqlite3.connect('notice_board.db') as conn:
             c = conn.cursor()
             c.execute("SELECT filename, filetype FROM notices WHERE department=?", (dept,))
             notices = c.fetchall()
-        return render_template('public.html', department=dept, notices=notices)
+        return render_template('public.html', department=dept, notices=notices, timer=timer)
     else:
         flash('Department not found.')
         return redirect(url_for('index'))
