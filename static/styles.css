@@ -1,4 +1,6 @@
-/* Basic Reset/Defaults */
+/* ---------------------------------------
+   1. RESET & GLOBAL STYLES
+---------------------------------------- */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +12,24 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header (from previous updates) */
+/* Container for general page content */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+/* Flash messages (e.g., for errors/success) */
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    color: #c00; /* Red color for errors/messages */
+}
+
+/* ---------------------------------------
+   2. HEADER
+---------------------------------------- */
 header {
     background-color: #333;
     color: #fff;
@@ -28,28 +47,94 @@ header {
 
 .header-container h1 {
     font-size: 1.8rem;
+    margin: 0;
 }
 
 .header-container p {
     margin: 0;
 }
 
-/* Container for overall page content */
-.container {
-    width: 80%;
-    margin: 20px auto;
-    overflow: hidden;
+/* ---------------------------------------
+   3. HERO SECTION (Landing Page)
+---------------------------------------- */
+.hero {
+    /* Replace with your own image if desired */
+    background: url("https://via.placeholder.com/1200x400") no-repeat center center/cover;
+    width: 100%;
+    padding: 100px 0;
+    color: #fff;
+    text-align: center;
+    position: relative;
 }
 
-/* Flash messages */
-.flashes {
-    list-style: none;
-    padding: 0;
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    background: rgba(0,0,0,0.5); /* Dark overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
     margin-bottom: 20px;
-    color: #c00; /* red color for errors/messages */
 }
 
-/* Form Container */
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ---------------------------------------
+   4. BUTTONS
+---------------------------------------- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Primary button color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #28a745;
+}
+
+.btn-secondary:hover {
+    background-color: #1e7e34;
+}
+
+/* ---------------------------------------
+   5. FORMS (Login & Sign Up)
+---------------------------------------- */
+/* Container that wraps the form in a neat card-like box */
 .form-container {
     background: #fff;
     border-radius: 8px;
@@ -82,33 +167,9 @@ header {
     border-radius: 4px;
 }
 
-/* Button Styles */
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007BFF; /* Primary button color */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-/* (Optional) Secondary button style */
-.btn-secondary {
-    background-color: #28a745;
-}
-
-.btn-secondary:hover {
-    background-color: #1e7e34;
-}
-
-/* Additional styling from previous enhancements */
+/* ---------------------------------------
+   6. DASHBOARD & DEPARTMENTS
+---------------------------------------- */
 .departments button {
     margin: 10px;
     transition: transform 0.3s;
@@ -124,7 +185,9 @@ header {
     background-color: #555;
 }
 
-/* Notice styling (admin, etc.) */
+/* ---------------------------------------
+   7. ADMIN PANEL & NOTICES
+---------------------------------------- */
 .notice {
     background: #fff;
     margin: 10px 0;
@@ -132,7 +195,8 @@ header {
     border-left: 5px solid #333;
 }
 
-.notice img, .notice video {
+.notice img, 
+.notice video {
     max-width: 100%;
     height: auto;
 }
